@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.dadagm</groupId>
+  <artifactId>gnwtools</artifactId>
+  <version>1.2-SNAPSHOT</version>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.5.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer>
+                  <mainClass>com.dadagm.Main</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.panteleyev</groupId>
+        <artifactId>jpackage-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <id>jpackage</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jpackage</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <name>GameWatchCoverMaker</name>
+          <appVersion>1.2</appVersion>
+          <vendor>DadaGM</vendor>
+          <copyright>Copyright © 2024 DadaGM</copyright>
+          <description>GameWatch Game Cover Maker Tool</description>
+          <mainClass>com.dadagm.Main</mainClass>
+          <mainJar>gnwtools-1.2-SNAPSHOT.jar</mainJar>
+          <input>target</input>
+          <icon>gnwtools.icns</icon>
+          <type>DMG</type>
+          <destination>target/jpackage</destination>
+          <runtimeImage>/opt/homebrew/Cellar/openjdk/25.0.2/libexec/openjdk.jdk/Contents/Home</runtimeImage>
+          <javaOptions>
+            <option>-Xmx512m</option>
+          </javaOptions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <properties>
+    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+  </properties>
+</project>
